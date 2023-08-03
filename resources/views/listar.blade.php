@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
+@extends('template/layout')
+@section('title', 'Pessoas Cadastradas')
+@section('conteudo')
 
-<head>
-    <title>Athenas</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-</head>
-
-<body>
-    <table id="pessoasTable" class="display">
+    <h1 class="display-6 mb-3">Pessoas Cadastradas</h1>
+    <table id="pessoasTable" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Código</th>
@@ -22,57 +18,81 @@
         <tbody>
         </tbody>
     </table>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#pessoasTable').DataTable({
-                ajax: {
-                    url: '/pessoas',
-                    method: 'GET',
+
+            var apiUrl = '/pessoas';
+            var columns = [{
+                    data: 'id'
                 },
-                columns: [{
-                        data: 'id'
-                    },
-                    {
-                        data: 'nome'
-                    },
-                    {
-                        data: 'cpf'
-                    },
-                    {
-                        data: 'email'
-                    },
-                    {
-                        data: 'categoria_id'
-                    },
-                    {
-                        data: null,
-                        render: function(data, type, row) {
-                            console.log(row.categoria_id );
-                            if (row.categoria_id === 1 || row.categoria_id === 2) {
-                                return 'Ouro';
-                            } else if (row.categoria_id === 3) {
-                                return 'Prata';
-                            } else {
-                                return '';
-                            }
-                        }
-                    },
-                    {
-                        data: null,
-                        render: function(data, type, row) {
-                            return '<button class="editBtn" data-id="' + row.Codigo +
-                                '">Editar</button>' +
-                                '<button class="deleteBtn" data-id="' + row.Codigo +
-                                '">Excluir</button>';
+                {
+                    data: 'nome'
+                },
+                {
+                    data: 'cpf'
+                },
+                {
+                    data: 'email'
+                },
+                {
+                    data: 'categoria_id'
+                },
+                {
+                    data: null,
+                    render: function(data, type, row) {
+                        if (row.categoria_id === 1 || row.categoria_id === 2) {
+                            return 'Ouro';
+                        } else if (row.categoria_id === 3) {
+                            return 'Prata';
+                        } else {
+                            return '';
                         }
                     }
-                ]
+                },
+                {
+                    data: null,
+                    render: function(data, type, row) {
+                        return '<button class="editBtn" data-id="' + row.Codigo +
+                            '">Editar</button>' +
+                            '<button class="deleteBtn" data-id="' + row.Codigo +
+                            '">Excluir</button>';
+                    }
+                }
+            ]
+
+            $('#pessoasTable').DataTable({
+                ajax: {
+                    url: apiUrl,
+                    method: 'GET',
+                },
+                columns: columns,
+                responsive: true,
+                language: {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    }
+                },
+                lengthMenu: [
+                    [5, 10, 20, 50, -1],
+                    [5, 10, 20, 50, "Todos"]
+                ],
+                pageLength: 5
             });
         });
     </script>
-</body>
 
-</html>
+@endsection
