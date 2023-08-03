@@ -65,11 +65,11 @@
                         </div>
                         <div class="form-group">
                             <label for="modal-cpf">CPF:</label>
-                            <input type="text" class="form-control" name="cpf" id="modal-cpf">
+                            <input type="text" class="form-control" name="cpf" id="modal-cpf"required>
                         </div>
                         <div class="form-group">
                             <label for="modal-email">E-mail:</label>
-                            <input type="text" class="form-control" name="email" id="modal-email">
+                            <input type="text" class="form-control" name="email" id="modal-email" required>
                         </div>
                         <div class="form-group">
                             <label for="modal-categoria">Categoria:</label>

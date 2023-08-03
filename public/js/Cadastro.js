@@ -26,6 +26,12 @@ $('#cpf').inputmask('999.999.999-99');
 $(document).on("submit", "form", function (e) {
     e.preventDefault();
     var form = this;
+
+    if ($(form).find('[required]').filter(function () { return $(this).val().trim() === ''; }).length > 0) {
+        toastr.error('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+
     $.ajax({
         url: 'pessoas',
         type: 'POST',
@@ -42,7 +48,8 @@ $(document).on("submit", "form", function (e) {
             }
         },
         error: function (xhr, status, error) {
-            $('#mensagemErro').text('Ocorreu um erro: ' + error);
+            console.log(xhr);
+            toastr.error('Ocorreu um erro: ' + error);
         }
     });
 });

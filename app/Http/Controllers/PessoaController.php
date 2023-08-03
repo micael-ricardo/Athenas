@@ -20,7 +20,7 @@ class PessoaController extends Controller
         $model = Pessoa::find($id);
 
         if (!$model) {
-            return response()->json(['error' => 'not found'], 404);
+            return response()->json(['error' => 'não encontrado'], 404);
         }
         return response()->json($model);
     }
@@ -37,7 +37,7 @@ class PessoaController extends Controller
             $model = Pessoa::create($request->all());
             return response()->json($model, 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erro ao cadastrar o eletrodoméstico'], 500);
+            return response()->json(['message' => 'Erro ao cadastrar pessoa'], 500);
         }
     }
 
@@ -48,7 +48,7 @@ class PessoaController extends Controller
             $model->delete();
             return response()->json(['message' => 'Pessoa removido com sucesso'], 204);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erro ao deletar Pessoa'], 404);
+            return response()->json(['message' => 'Erro ao deletar pessoa'], 404);
         }
     }
 
@@ -70,7 +70,7 @@ class PessoaController extends Controller
 
             return response()->json(['message' => 'Pessoa atualizado com sucesso'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erro ao atualizar Pessoa'], 500);
+            return response()->json(['message' => 'Erro ao atualizar pessoa'], 500);
         }
     }
 

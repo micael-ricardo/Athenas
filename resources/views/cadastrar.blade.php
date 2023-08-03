@@ -11,11 +11,11 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" name="cpf" id="cpf">
+                <input type="text" class="form-control" name="cpf" id="cpf" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="email">E-mail</label>
-                <input type="text" class="form-control" name="email" id="email">
+                <input type="text" class="form-control" name="email" id="email" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="categoria">Categoria:</label>
