@@ -23,6 +23,7 @@ $router->get('/categorias', 'CategoriaController@ListarCategorias');
 
 $router->get('/pessoas', 'PessoaController@ListarPessoas');
 $router->get('/pessoas/{id}', 'PessoaController@ListarPessoa');
+$router->post('/pessoas/atualizar/{id}', 'PessoaController@AtualizarPessoa');
 $router->post('/pessoas', 'PessoaController@InserirPessoa');
 $router->delete('/pessoas/{id}', 'PessoaController@DeletePessoa');
 

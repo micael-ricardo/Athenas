@@ -57,9 +57,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/pessoas/atualizar/{id}" method="post">
+                    <form id="formEditar" method="post">
                         <input type="hidden" name="id" id="modal-id">
-
                         <div class="form-group">
                             <label for="modal-nome">Nome:</label>
                             <input type="text" class="form-control" name="nome" id="modal-nome" required>
@@ -78,11 +77,11 @@
                                 <option value="">Selecione</option>
                             </select>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Salvar </button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
