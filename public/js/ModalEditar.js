@@ -5,6 +5,11 @@ function preencherCampos(data) {
     $('#modal-categoria_id').val(data.categoria_id);
     $('#modal-id').val(data.id);
 }
+
+
+// Mascara
+$('#modal-cpf').inputmask('999.999.999-99');
+
 $(document).on('click', '.btn-editar', function (e) {
     e.preventDefault();
     var id = $(this).data('id');
@@ -56,6 +61,10 @@ $(document).on("submit", "#formEditar", function (e) {
     var form = $(this);
     function showError() {
         toastr.error('Ocorreu um erro ao atualizar  Pessoa.');
+    }
+    if ($(form).find('[required]').filter(function () { return $(this).val().trim() === ''; }).length > 0) {
+        toastr.error('Por favor, preencha todos os campos obrigatórios.');
+        return;
     }
     var data = form.serialize();
     $.ajax({
