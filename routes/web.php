@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Controllers\PessoaController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -16,3 +18,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/pessoas', 'PessoaController@ListarPessoas');
+$router->get('/pessoas/{id}', 'PessoaController@ListarPessoa');
+$router->post('/pessoas', 'PessoaController@InserirPessoa');
+$router->post('/pessoas/{id}/status/done', 'PessoaController@InserirPessoa');
+$router->delete('/pessoas/{id}', 'PessoaController@DeletePessoa');

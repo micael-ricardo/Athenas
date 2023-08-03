@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Categoria;
+use App\Models\Pessoa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class PessoaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Categoria::class;
+    protected $model = Pessoa::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->word,
+            'nome' => $this->faker->name,
+            'cpf' =>  '222.222.222-22',
+            'email' => $this->faker->unique()->safeEmail,
+            'categoria_id' => $this->faker->randomElement([1, 2, 3])
         ];
     }
 }
