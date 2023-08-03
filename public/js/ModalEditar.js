@@ -10,7 +10,7 @@ $(document).on('click', '.btn-editar', function (e) {
     var id = $(this).data('id');
     console.log(id);
 
-    carregarCategorias().then(function() {
+    carregarCategorias().then(function () {
         $.ajax({
             type: 'GET',
             url: '/pessoas/' + id,
@@ -26,25 +26,58 @@ $(document).on('click', '.btn-editar', function (e) {
 });
 
 function carregarCategorias() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         $.ajax({
             url: '/categorias',
             type: 'GET',
-            success: function(response) {
+            success: function (response) {
                 var categorias = response.categorias;
                 var selectElement = $('#modal-categoria_id');
                 selectElement.empty();
                 selectElement.append('<option value="">Selecione</option>');
-                categorias.forEach(function(categoria) {
+                categorias.forEach(function (categoria) {
                     var optionElement = $('<option>').val(categoria.id).text(categoria.nome);
                     selectElement.append(optionElement);
                 });
                 resolve();
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Erro ao obter as categorias:', error);
                 reject();
             }
         });
     });
 }
+
+
+$(document).on("submit", "#formEditar", function (e) {
+    e.preventDefault();
+    var id = $('#modal-id').val();
+    var form = $(this);
+    function showError() {
+        toastr.error('Ocorreu um erro ao atualizar  Pessoa.');
+    }
+    var data = form.serialize();
+    $.ajax({
+        url: '/pessoas/atualizar/' + id,
+        type: 'POST',
+        data: data,
+        success: function (response, status, xhr) {
+            if (xhr.status === 200) {
+                toastr.success('Pessoa atualizada com sucesso!');
+                $('#ModalDeletar').modal('hide');
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                showError();
+            }
+        },
+        error: function (xhr) {
+            showError();
+        },
+        complete: function () {
+            $('#ModalDeletar').modal('hide');
+        }
+    });
+});
