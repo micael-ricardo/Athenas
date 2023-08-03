@@ -22,5 +22,9 @@ $router->get('/', function () use ($router) {
 $router->get('/pessoas', 'PessoaController@ListarPessoas');
 $router->get('/pessoas/{id}', 'PessoaController@ListarPessoa');
 $router->post('/pessoas', 'PessoaController@InserirPessoa');
-$router->post('/pessoas/{id}/status/done', 'PessoaController@InserirPessoa');
 $router->delete('/pessoas/{id}', 'PessoaController@DeletePessoa');
+
+
+$router->get('/listar', function () {
+    return view('listar');
+});

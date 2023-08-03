@@ -10,6 +10,7 @@ class PessoaController extends Controller
 
     public function ListarPessoas()
     {
+        
         $model = Pessoa::paginate();
 
         return response()->json($model);
