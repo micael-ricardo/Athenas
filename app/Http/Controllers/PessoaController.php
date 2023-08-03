@@ -10,18 +10,18 @@ class PessoaController extends Controller
 
     public function ListarPessoas()
     {
-        
-        $model = Pessoa::paginate();
 
-        return response()->json($model);
+        $dados = Pessoa::get();
+        $data = array('data' => $dados);
+        return response()->json($data);
     }
 
     public function ListarPessoa($id)
     {
         $model = Pessoa::find($id);
 
-        if(!$model){
-            return response()->json(['error'=>'not found'], 404);
+        if (!$model) {
+            return response()->json(['error' => 'not found'], 404);
         }
 
         return response()->json($model);
@@ -29,6 +29,7 @@ class PessoaController extends Controller
 
     public function InserirPessoa(Request $request)
     {
+
 
         $this->validate($request, [
             'nome' => 'required',
@@ -43,15 +44,14 @@ class PessoaController extends Controller
     }
 
     public function DeletePessoa(Request $request, $id)
-    {   
+    {
         $modal = Pessoa::find($id);
 
-        if(!$modal){
+        if (!$modal) {
             return response()->json(['error' => 'not found'], 404);
         }
-         
+
         $modal->delete();
         return response()->json([], 204);
     }
-
 }

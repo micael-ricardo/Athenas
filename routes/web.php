@@ -19,6 +19,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->get('/cadastrar', 'CategoriaController@ListarCategorias');
+
 $router->get('/pessoas', 'PessoaController@ListarPessoas');
 $router->get('/pessoas/{id}', 'PessoaController@ListarPessoa');
 $router->post('/pessoas', 'PessoaController@InserirPessoa');
