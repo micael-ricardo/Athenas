@@ -33,4 +33,5 @@
                 Cancelar</a>
         </div>
     </form>
+    <script src="js/Cadastro.js"></script>
 @endsection

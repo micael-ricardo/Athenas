@@ -27,22 +27,22 @@ class PessoaController extends Controller
     }
 
     public function InserirPessoa(Request $request)
-    {
-
-
-        $this->validate($request, [
-            'nome' => 'required',
-            'cpf' => 'required',
-            'email' => 'required',
-            'categoria_id' => 'required'
-        ]);
-
-        $model = Pessoa::create($request->all());
-
-        return response()->json($model, 201);
+    {                
+        try {
+            $this->validate($request, [
+                'nome' => 'required',
+                'cpf' => 'required',
+                'email' => 'required',
+                'categoria_id' => 'required'
+            ]);
+            $model = Pessoa::create($request->all());
+            return response()->json($model, 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erro ao cadastrar o eletrodoméstico'], 500);
+        }
     }
 
-    public function DeletePessoa(Request $request, $id)
+    public function DeletePessoa($id)
     {
         try {
             $model = Pessoa::find($id);

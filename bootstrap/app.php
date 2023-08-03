@@ -76,9 +76,12 @@ $app->configure('app');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'auth.basic' => Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    'guest' => App\Http\Middleware\RedirectIfAuthenticated::class,
+    'session' => \Illuminate\Session\Middleware\StartSession::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +93,7 @@ $app->configure('app');
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
+$app->register(Illuminate\Validation\ValidationServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
