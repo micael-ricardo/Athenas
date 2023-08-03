@@ -10,7 +10,6 @@ class PessoaController extends Controller
 
     public function ListarPessoas()
     {
-
         $dados = Pessoa::get();
         $data = array('data' => $dados);
         return response()->json($data);
@@ -45,13 +44,12 @@ class PessoaController extends Controller
 
     public function DeletePessoa(Request $request, $id)
     {
-        $modal = Pessoa::find($id);
-
-        if (!$modal) {
-            return response()->json(['error' => 'not found'], 404);
+        try {
+            $model = Pessoa::find($id);
+            $model->delete();
+            return response()->json(['message' => 'Pessoa removido com sucesso'], 204);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erro ao deletar Pessoa'], 404);
         }
-
-        $modal->delete();
-        return response()->json([], 204);
     }
 }

@@ -34,10 +34,9 @@ $(document).ready(function() {
         {
             data: null,
             render: function(data, type, row) {
-                var nome = row.nome;
-                var btnEditar = '<a href="/candidatos/' + data + '/edit" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>';
-                var btnDeletar = '<button type="button" data-bs-target="#ModalDeletar" data-bs-toggle="modal" data-id="' + data + '" data-nome="' + nome + '" class="btn btn-danger btn-sm excluir-candidato"><i class="bi bi-trash"></i></button>';
- 
+                var nome = data.nome;
+                var btnEditar = '<a href="/candidatos/' + data.id + '/edit" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>';
+                var btnDeletar = '<button type="button" data-bs-target="#ModalDeletar" data-bs-toggle="modal" data-id="' + data.id + '" data-nome="' + nome + '" class="btn btn-danger btn-sm excluir-pessoa"><i class="bi bi-trash"></i></button>';
                 return btnEditar + ' ' + btnDeletar;
             },
             className: 'text-center'
