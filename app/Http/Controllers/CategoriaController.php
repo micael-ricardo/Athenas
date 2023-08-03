@@ -11,7 +11,7 @@ class CategoriaController extends Controller
     public function ListarCategorias()
     {
         $categorias = Categoria::all();
-        return view('cadastrar', compact('categorias'));
+        return response()->json(['categorias' => $categorias]);
     }
 
 }

@@ -22,7 +22,6 @@ class PessoaController extends Controller
         if (!$model) {
             return response()->json(['error' => 'not found'], 404);
         }
-
         return response()->json($model);
     }
 
@@ -52,4 +51,27 @@ class PessoaController extends Controller
             return response()->json(['message' => 'Erro ao deletar Pessoa'], 404);
         }
     }
+
+    public function AtualizarPessoa(Request $request, $id)
+    {
+        try {
+            $this->validate($request, [
+            'nome' => 'required',
+            'cpf' => 'required',
+            'email' => 'required',
+            'categoria_id' => 'required'
+        ]);
+            $model = Pessoa::findOrFail($id);
+            $model->nome = $request['nome'];
+            $model->cpf = $request['cpf'];
+            $model->email = $request['email'];
+            $model->categoria_id = $request['categoria_id'];
+            $model->save();
+
+            return response()->json(['message' => 'Pessoa atualizado com sucesso'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erro ao atualizar Pessoa'], 500);
+        }
+    }
+
 }

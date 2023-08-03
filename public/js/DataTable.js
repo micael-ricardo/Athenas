@@ -1,46 +1,47 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     var apiUrl = '/pessoas';
     var columns = [{
-            data: 'id',
-            className: 'text-center'
+        data: 'id',
+        className: 'text-center'
+    },
+    {
+        data: 'nome'
+    },
+    {
+        data: 'cpf'
+    },
+    {
+        data: 'email'
+    },
+    {
+        data: 'categoria_id',
+        className: 'text-center'
+    },
+    {
+        data: null,
+        render: function (data, type, row) {
+            if (row.categoria_id === 1 || row.categoria_id === 2) {
+                return '<span class="btn btn-warning btn-sm"> Ouro </span>';
+            } else if (row.categoria_id === 3) {
+                return '<span class="btn btn-secondary btn-sm"> Prata </span>';
+            } else {
+                return '';
+            }
         },
-        {
-            data: 'nome'
+        className: 'text-center'
+    },
+    {
+        data: null,
+        render: function (data, type, row) {
+            var nome = data.nome;
+            var btnEditar = '<a href="#" class="btn btn-info btn-sm btn-editar" data-id="' + data.id + '"><i class="bi bi-pencil"></i></a>'; 
+            // '<a href="/pessoas/' + data.id + '" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>';
+            var btnDeletar = '<button type="button" data-bs-target="#ModalDeletar" data-bs-toggle="modal" data-id="' + data.id + '" data-nome="' + nome + '" class="btn btn-danger btn-sm excluir-pessoa"><i class="bi bi-trash"></i></button>';
+            return btnEditar + ' ' + btnDeletar;
         },
-        {
-            data: 'cpf'
-        },
-        {
-            data: 'email'
-        },
-        {
-            data: 'categoria_id',
-            className: 'text-center'
-        },
-        {
-            data: null,
-            render: function(data, type, row) {
-                if (row.categoria_id === 1 || row.categoria_id === 2) {
-                    return '<span class="btn btn-warning btn-sm"> Ouro </span>';
-                } else if (row.categoria_id === 3) {
-                    return '<span class="btn btn-secondary btn-sm"> Prata </span>';
-                } else {
-                    return '';
-                }
-            },
-            className: 'text-center'
-        },
-        {
-            data: null,
-            render: function(data, type, row) {
-                var nome = data.nome;
-                var btnEditar = '<a href="/candidatos/' + data.id + '/edit" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>';
-                var btnDeletar = '<button type="button" data-bs-target="#ModalDeletar" data-bs-toggle="modal" data-id="' + data.id + '" data-nome="' + nome + '" class="btn btn-danger btn-sm excluir-pessoa"><i class="bi bi-trash"></i></button>';
-                return btnEditar + ' ' + btnDeletar;
-            },
-            className: 'text-center'
-        }
+        className: 'text-center'
+    }
     ]
 
     $('#pessoasTable').DataTable({
@@ -49,6 +50,7 @@ $(document).ready(function() {
             method: 'GET',
         },
         columns: columns,
+        scrollX: true,
         responsive: true,
         language: {
             "sEmptyTable": "Nenhum registro encontrado",

@@ -21,11 +21,8 @@
                 <label for="categoria">Categoria:</label>
                 <select class="form-control" name="categoria_id" id="categoria_id" required>
                     <option value="">Selecione</option>
-                    @foreach ($categorias as $categoria)
-                        <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
-                    @endforeach
                 </select>
-            </div>
+            </div>            
         </div>
         <div class="col-md-12 mt-4">
             <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Salvar </button>

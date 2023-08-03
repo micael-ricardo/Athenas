@@ -19,12 +19,17 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/cadastrar', 'CategoriaController@ListarCategorias');
+$router->get('/categorias', 'CategoriaController@ListarCategorias');
 
 $router->get('/pessoas', 'PessoaController@ListarPessoas');
 $router->get('/pessoas/{id}', 'PessoaController@ListarPessoa');
 $router->post('/pessoas', 'PessoaController@InserirPessoa');
 $router->delete('/pessoas/{id}', 'PessoaController@DeletePessoa');
+
+
+$router->get('/cadastrar', function () {
+    return view('cadastrar');
+});
 
 
 $router->get('/listar', function () {
