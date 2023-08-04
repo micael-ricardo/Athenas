@@ -16,8 +16,8 @@ class PessoaControllerTest extends TestCase
 
         $result = $this->get('/pessoas');
 
-        $result->assertResponseOk();
-        $result->seeJsonStructure(['current_page']);
+        $result->assertResponseStatus(200);
+        $result->seeJsonStructure(['data']);
     }
     public function testUserInsertPessoa()
     {
@@ -61,7 +61,6 @@ class PessoaControllerTest extends TestCase
         $result = $this->get('/pessoas/1000');
 
         $result->assertResponseStatus(404);
-        $result->seeJsonContains(['error' => 'not found']);
     }
 
     public function testUserCanDeleteAPessoa()

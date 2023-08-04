@@ -15,8 +15,8 @@ use App\Http\Controllers\PessoaController;
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('/', function () {
+    return view('listar');
 });
 
 $router->get('/categorias', 'CategoriaController@ListarCategorias');

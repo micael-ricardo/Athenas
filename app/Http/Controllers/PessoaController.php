@@ -10,8 +10,8 @@ class PessoaController extends Controller
 
     public function ListarPessoas()
     {
-        $dados = Pessoa::get();
-        $data = array('data' => $dados);
+        $model = Pessoa::all(); 
+        $data = ['data' => $model];
         return response()->json($data);
     }
 
@@ -37,7 +37,7 @@ class PessoaController extends Controller
             $model = Pessoa::create($request->all());
             return response()->json($model, 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erro ao cadastrar pessoa'], 500);
+            return response()->json(['message' => 'Erro ao cadastrar pessoa'], 422);
         }
     }
 
